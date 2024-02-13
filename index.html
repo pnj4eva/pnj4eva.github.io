@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💘</text></svg>">
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Love uuu</title>
+    <style>
+      body {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        font-family: Arial;
+        justify-content: center;
+        margin: 20px 0 20px 0;
+      }
+      button {
+        background: rgb(8, 126, 164);
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 1em;
+        font-weight: 700;
+        margin-top: 20px;
+        padding: 15px;
+      }
+      button:hover {
+        background: rgba(8, 126, 164, 0.9);
+      }
+      button.secondary {
+        background: #fff;
+        border: 1px rgb(8, 126, 164, 0.5) solid;
+        color: #000;
+      }
+      img {
+        width: 80%;
+      }
+      .step {
+        align-items: center;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 20px;
+        max-width: 430px;
+      }
+      .step.active {
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="step active">
+      <h2>Hello my honey 🍯</h2>
+      <img src="IMG_010.jpg">
+      <button>Next ➡️</button>
+    </div>
+    <div class="step">
+      <h2>How r u doing 😏</h2>
+      <img src="IMG_020.jpg">
+      <button>I'm good 👍</button>
+    </div>
+    <div class="step">
+      <h2>Ur so cuteeee 😍😍</h2>
+      <img src="IMG_030.jpg">
+      <button>Thank uuu 🙈</button>
+    </div>
+    <div class="step">
+      <h2>I love u sooo much 😘😭</h2>
+      <img src="IMG_040.jpg">
+      <button>Me toooo 🤓</button>
+    </div>
+    <div class="step">
+      <h2>We started in Santa Cruz 🌊</h2>
+      <img src="IMG_050.jpg">
+      <button>🥺🥺🥺</button>
+    </div>
+    <div class="step">
+      <h2>Now we're in Ludwigshafen 🤯</h2>
+      <img src="IMG_051.jpg">
+      <button>Omgggg</button>
+    </div>
+    <div class="step">
+      <h2>R u free on valentines 🫣</h2>
+      <img src="IMG_052.jpg">
+      <button>🫣🫣🫣</button>
+    </div>
+    <div class="step">
+      <h2>Will u be my valentine 🫣🫣</h2>
+      <img src="IMG_053.jpg">
+      <button>😍😍😍</button>
+    </div>
+    <div class="step">
+      <h2>Pleaseeeee 🫣🫣🫣</h2>
+      <img src="IMG_054.jpg">
+      <button>Yesssss</button>
+    </div>
+    <div class="step">
+      <h2>Thank uuuuu 😻</h2>
+      <img src="IMG_055.jpg">
+      <button>Love uuuuu ❤️</button>
+    </div>
+    <div class="step" id="foodStep">
+      <h2>What do u want to eat 🍽️</h2>
+      <button class="secondary food">Italian 🇮🇹</button>
+      <button class="secondary food">Japanese 🇯🇵</button>
+      <button class="secondary food">German 🇩🇪</button>
+      <button class="secondary food korean">Korean 🇰🇷</button>
+    </div>
+    <div class="step" id="timeStep">
+      <h2>That's the right answer 🇰🇷</h2>
+      <h2>What time are u free ⏰</h2>
+      <button class="secondary time">5:00pm</button>
+      <button class="secondary time">6:00pm</button>
+      <button class="secondary time">7:00pm</button>
+      <button class="secondary time">8:00pm</button>
+      <button class="secondary time 9pm">9:00pm 😳</button>
+    </div>
+    <div class="step">
+      <h2>It's a date 💘</h2>
+      <h2>Location: Soban Mannheim 🇰🇷</h2>
+      <h2 id="selectedTime"></h2>
+      <button data-back-to="timeStep">Go back and try 9pm 🔙</button>
+    </div>
+    <div class="step" id="wrongAnswer">
+      <h2>Wrong answer 😡</h2>
+      <button data-back-to="foodStep">Back 🔙</button>
+    </div>
+    <div class="step" id="trombare">
+      <h2>Trombare 🎺🎺</h2>
+      <button data-back-to="timeStep">Back 🔙</button>
+    </div>
+    <script>
+      const selectedTime = document.getElementById('selectedTime');
+      const trombare = document.getElementById('trombare');
+      const wrongAnswer = document.getElementById('wrongAnswer');
+      document.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => {
+          setTimeout(() => {
+            const step = button.parentElement;
+            step.classList.remove('active');
+            if (button.classList.contains('food')) {
+              if (button.classList.contains('korean')) {
+                step.nextElementSibling.classList.add('active');
+              } else {
+                wrongAnswer.classList.add('active');
+              }
+            } else if (button.hasAttribute('data-back-to')) {
+              const backTo = button.getAttribute('data-back-to');
+              document.getElementById(backTo).classList.add('active');
+            } else if (button.classList.contains('time')) {
+              if (button.classList.contains('9pm')) {
+                trombare.classList.add('active');
+              } else {
+                selectedTime.innerText = `Time: ${button.innerText}`;
+                step.nextElementSibling.classList.add('active');
+              }
+            } else {
+              step.nextElementSibling.classList.add('active');
+            }
+          }, 100);
+        });
+      })
+    </script>
+</body>
+</html>
